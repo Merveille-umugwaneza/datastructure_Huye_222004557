@@ -1,0 +1,49 @@
+umugwanezamr5@penguin:~$ sudo /opt/lampp/lampp start
+Starting XAMPP for Linux 8.2.12-0...
+XAMPP: Starting Apache...ok.
+XAMPP: Starting MySQL...ok.
+XAMPP: Starting ProFTPD...ok.
+umugwanezamr5@penguin:~$ /opt/lampp/bin/mysql/ -h localhost -u root
+-bash: /opt/lampp/bin/mysql/: Not a directory
+umugwanezamr5@penguin:~$ /opt/lampp/bin/mysql -h localhost -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 9
+Server version: 10.4.32-MariaDB Source distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use database ruhande
+ERROR 1049 (42000): Unknown database 'database'
+MariaDB [(none)]> show databse
+    -> USE Ruhande;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'databse
+USE Ruhande' at line 2
+MariaDB [(none)]> SHOW DATABASE ruhande;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'DATABASE ruhande' at line 1
+MariaDB [(none)]> CREATE DATABASE ruhande;
+ERROR 1007 (HY000): Can't create database 'ruhande'; database exists
+MariaDB [(none)]> USE ruhande;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MariaDB [ruhande]> show databases
+    -> show databases;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'show databases' at line 2
+MariaDB [ruhande]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| Ruhande            |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| ruhande            |
+| test               |
++--------------------+
+7 rows in set (0.002 sec)
+
+MariaDB [ruhande]> show tables;

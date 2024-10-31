@@ -1,0 +1,169 @@
+umugwanezamr5@penguin:~$ /opt/lampp/bin/mysql -h localhost -u root -p
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 11
+Server version: 10.4.32-MariaDB Source distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> USE ruhande;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MariaDB [ruhande]> SELECT * FROM ngoma;
++------+------------+----------+----------+-----------+----------+----------+-----------+---------------------+
+| ID   | firstname  | lastname | province | district  | sector   | cell     | phone     | email               |
++------+------------+----------+----------+-----------+----------+----------+-----------+---------------------+
+|    1 | Rwema      | Elvise   | western  | Rubavu    | Gisenyi  | Bugoyi   | 786303831 | elvise@gmail.com    |
+|    2 | kiki       | doe      | eastern  | ngoma     | bwiza    | rwemasha | 798654531 | kiki@gmail.com      |
+|    1 | Rwema      | Elvise   | western  | Rubavu    | Gisenyi  | Bugoyi   | 786303831 | rwema@gmail.com     |
+|    2 | charamante | ishimwe  | northern | musanze   | cyuve    | rango    | 785635249 | charmante@gamil.com |
+|    2 | Amanda     | ishimwe  | Eastern  | nyagatare | rwemasha | ryabega  | 781234569 | amanda@gamil.com    |
+|    5 | Irakoze    | Angel    | NOrthern | rulindo   | nyange   | save     | 783091133 | angeloa@gamil.com   |
+|    4 | samantha   | Ineza    | kigali   | kicukiro  | gatenga  | save     | 791002350 | samanta@gamil.com   |
++------+------------+----------+----------+-----------+----------+----------+-----------+---------------------+
+7 rows in set (0.003 sec)
+
+MariaDB [ruhande]> INSERT INTO ngoma values('8','Ihame','Mickhail','kigali','Gasabo','kimironko','oga','078547890','ihame@gmail.com;
+    '> INSERT INTO ngoma values('8','Ihame','Mickhail','kigali','Gasabo','kimironko','oga','078547890','ihame@gmail.com');
+    '> ;+--
+    '> Bye
+umugwanezamr5@penguin:~$ /opt/lampp/bin/mysql -h localhost -u root -p
+Enter password: 
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+umugwanezamr5@penguin:~$ /opt/lampp/bin/mysql -h localhost -u root -p
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 13
+Server version: 10.4.32-MariaDB Source distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> Use ruhande;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MariaDB [ruhande]> INSERT INTO ngoma values('8','Ihame','Mickhail','kigali','Gasabo','kimironko','oga','078547890','ihame@gmail.com');
+Query OK, 1 row affected (0.016 sec)
+
+MariaDB [ruhande]> INSERT INTO ngoma values('9','Ihame','Mickhail','kigali','Gasabo','kimironko','oga','078547890','ihame@gmail.com');
+Query OK, 1 row affected (0.014 sec)
+
+MariaDB [ruhande]> INSERT INTO ngoma values('10','Ihirwe','Mickile','kigali','kicukiro','kimironko','oga','079547890','ihae@gmail.com');
+Query OK, 1 row affected (0.013 sec)
+
+MariaDB [ruhande]> SELECT * FROM ngoma;
++------+------------+----------+----------+-----------+-----------+----------+-----------+---------------------+
+| ID   | firstname  | lastname | province | district  | sector    | cell     | phone     | email               |
++------+------------+----------+----------+-----------+-----------+----------+-----------+---------------------+
+|    1 | Rwema      | Elvise   | western  | Rubavu    | Gisenyi   | Bugoyi   | 786303831 | elvise@gmail.com    |
+|    2 | kiki       | doe      | eastern  | ngoma     | bwiza     | rwemasha | 798654531 | kiki@gmail.com      |
+|    1 | Rwema      | Elvise   | western  | Rubavu    | Gisenyi   | Bugoyi   | 786303831 | rwema@gmail.com     |
+|    2 | charamante | ishimwe  | northern | musanze   | cyuve     | rango    | 785635249 | charmante@gamil.com |
+|    2 | Amanda     | ishimwe  | Eastern  | nyagatare | rwemasha  | ryabega  | 781234569 | amanda@gamil.com    |
+|    5 | Irakoze    | Angel    | NOrthern | rulindo   | nyange    | save     | 783091133 | angeloa@gamil.com   |
+|    4 | samantha   | Ineza    | kigali   | kicukiro  | gatenga   | save     | 791002350 | samanta@gamil.com   |
+|    8 | Ihame      | Mickhail | kigali   | Gasabo    | kimironko | oga      |  78547890 | ihame@gmail.com     |
+|    9 | Ihame      | Mickhail | kigali   | Gasabo    | kimironko | oga      |  78547890 | ihame@gmail.com     |
+|   10 | Ihirwe     | Mickile  | kigali   | kicukiro  | kimironko | oga      |  79547890 | ihae@gmail.com      |
++------+------------+----------+----------+-----------+-----------+----------+-----------+---------------------+
+10 rows in set (0.001 sec)
+
+MariaDB [ruhande]> update id from ngoma set id = 3 where firstname = "Rwema";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'from ngoma set id = 3 where firstname = "Rwema"' at line 1
+MariaDB [ruhande]> update id from ngoma set id = 3 where firstname = 'Rwema';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'from ngoma set id = 3 where firstname = 'Rwema'' at line 1
+MariaDB [ruhande]> UPDATE ID='3' WHERE ID='1';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''3' WHERE ID='1'' at line 1
+MariaDB [ruhande]> UPDATE ngoma set ID = '3' where email = 'rwema@gmail.com';
+Query OK, 1 row affected (0.019 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [ruhande]> SELECT * FROM ngoma;
++------+------------+----------+----------+-----------+-----------+----------+-----------+---------------------+
+| ID   | firstname  | lastname | province | district  | sector    | cell     | phone     | email               |
++------+------------+----------+----------+-----------+-----------+----------+-----------+---------------------+
+|    1 | Rwema      | Elvise   | western  | Rubavu    | Gisenyi   | Bugoyi   | 786303831 | elvise@gmail.com    |
+|    2 | kiki       | doe      | eastern  | ngoma     | bwiza     | rwemasha | 798654531 | kiki@gmail.com      |
+|    3 | Rwema      | Elvise   | western  | Rubavu    | Gisenyi   | Bugoyi   | 786303831 | rwema@gmail.com     |
+|    2 | charamante | ishimwe  | northern | musanze   | cyuve     | rango    | 785635249 | charmante@gamil.com |
+|    2 | Amanda     | ishimwe  | Eastern  | nyagatare | rwemasha  | ryabega  | 781234569 | amanda@gamil.com    |
+|    5 | Irakoze    | Angel    | NOrthern | rulindo   | nyange    | save     | 783091133 | angeloa@gamil.com   |
+|    4 | samantha   | Ineza    | kigali   | kicukiro  | gatenga   | save     | 791002350 | samanta@gamil.com   |
+|    8 | Ihame      | Mickhail | kigali   | Gasabo    | kimironko | oga      |  78547890 | ihame@gmail.com     |
+|    9 | Ihame      | Mickhail | kigali   | Gasabo    | kimironko | oga      |  78547890 | ihame@gmail.com     |
+|   10 | Ihirwe     | Mickile  | kigali   | kicukiro  | kimironko | oga      |  79547890 | ihae@gmail.com      |
++------+------------+----------+----------+-----------+-----------+----------+-----------+---------------------+
+10 rows in set (0.001 sec)
+
+MariaDB [ruhande]> UPDATE ngoma set ID = '4' where firstname='charmante';
+Query OK, 0 rows affected (0.001 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+MariaDB [ruhande]> UPDATE ngoma set ID = '5' where firstname='Amanda';
+Query OK, 1 row affected (0.021 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [ruhande]> UPDATE ngoma set ID = '6' where firstname='Irakoze';
+Query OK, 1 row affected (0.012 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [ruhande]> UPDATE ngoma set ID = '7' where firstname='samantha';
+Query OK, 1 row affected (0.030 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [ruhande]> SELECT * FROM ngoma;
++------+------------+----------+----------+-----------+-----------+----------+-----------+---------------------+
+| ID   | firstname  | lastname | province | district  | sector    | cell     | phone     | email               |
++------+------------+----------+----------+-----------+-----------+----------+-----------+---------------------+
+|    1 | Rwema      | Elvise   | western  | Rubavu    | Gisenyi   | Bugoyi   | 786303831 | elvise@gmail.com    |
+|    2 | kiki       | doe      | eastern  | ngoma     | bwiza     | rwemasha | 798654531 | kiki@gmail.com      |
+|    3 | Rwema      | Elvise   | western  | Rubavu    | Gisenyi   | Bugoyi   | 786303831 | rwema@gmail.com     |
+|    2 | charamante | ishimwe  | northern | musanze   | cyuve     | rango    | 785635249 | charmante@gamil.com |
+|    5 | Amanda     | ishimwe  | Eastern  | nyagatare | rwemasha  | ryabega  | 781234569 | amanda@gamil.com    |
+|    6 | Irakoze    | Angel    | NOrthern | rulindo   | nyange    | save     | 783091133 | angeloa@gamil.com   |
+|    7 | samantha   | Ineza    | kigali   | kicukiro  | gatenga   | save     | 791002350 | samanta@gamil.com   |
+|    8 | Ihame      | Mickhail | kigali   | Gasabo    | kimironko | oga      |  78547890 | ihame@gmail.com     |
+|    9 | Ihame      | Mickhail | kigali   | Gasabo    | kimironko | oga      |  78547890 | ihame@gmail.com     |
+|   10 | Ihirwe     | Mickile  | kigali   | kicukiro  | kimironko | oga      |  79547890 | ihae@gmail.com      |
++------+------------+----------+----------+-----------+-----------+----------+-----------+---------------------+
+10 rows in set (0.001 sec)
+
+MariaDB [ruhande]> UPDATE ngoma set ID = 4' where firstname='charmante';
+    '> UPDATE ngoma set ID = 4' where firstname='charmante';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' where firstname='charmante';
+UPDATE ngoma set ID = 4' where firstname='char...' at line 1
+MariaDB [ruhande]> UPDATE ngoma set ID = 4' where firstname='charmante';
+UPDATE ngoma set ID = '4' where firstname='charamante';
+    '> 
+    '> UPDATE ngoma set ID = 4' where firstname='charmante';
+UPDATE ngoma set ID = '4' where firstname='charamante';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' where firstname='charmante';
+UPDATE ngoma set ID = '4' where firstname='cha...' at line 1
+Query OK, 1 row affected (0.014 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [ruhande]> SELECT * FROM ngoma;
++------+------------+----------+----------+-----------+-----------+----------+-----------+---------------------+
+| ID   | firstname  | lastname | province | district  | sector    | cell     | phone     | email               |
++------+------------+----------+----------+-----------+-----------+----------+-----------+---------------------+
+|    1 | Rwema      | Elvise   | western  | Rubavu    | Gisenyi   | Bugoyi   | 786303831 | elvise@gmail.com    |
+|    2 | kiki       | doe      | eastern  | ngoma     | bwiza     | rwemasha | 798654531 | kiki@gmail.com      |
+|    3 | Rwema      | Elvise   | western  | Rubavu    | Gisenyi   | Bugoyi   | 786303831 | rwema@gmail.com     |
+|    4 | charamante | ishimwe  | northern | musanze   | cyuve     | rango    | 785635249 | charmante@gamil.com |
+|    5 | Amanda     | ishimwe  | Eastern  | nyagatare | rwemasha  | ryabega  | 781234569 | amanda@gamil.com    |
+|    6 | Irakoze    | Angel    | NOrthern | rulindo   | nyange    | save     | 783091133 | angeloa@gamil.com   |
+|    7 | samantha   | Ineza    | kigali   | kicukiro  | gatenga   | save     | 791002350 | samanta@gamil.com   |
+|    8 | Ihame      | Mickhail | kigali   | Gasabo    | kimironko | oga      |  78547890 | ihame@gmail.com     |
+|    9 | Ihame      | Mickhail | kigali   | Gasabo    | kimironko | oga      |  78547890 | ihame@gmail.com     |
+|   10 | Ihirwe     | Mickile  | kigali   | kicukiro  | kimironko | oga      |  79547890 | ihae@gmail.com      |
++------+------------+----------+----------+-----------+-----------+----------+-----------+---------------------+
+10 rows in set (0.002 sec)
+
+MariaDB [ruhande]> 

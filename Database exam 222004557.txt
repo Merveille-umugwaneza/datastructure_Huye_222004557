@@ -1,3 +1,5 @@
+PART _A 
+--------------------------------------------------------------------------------------------------------------------------------------
 mysql> create database clients;
 Query OK, 1 row affected (0.02 sec)
 mysql> use clients;
@@ -86,7 +88,11 @@ mysql> select *from Client12;
 |        0 | Emily Davis   | 654 Birch St | Nyagatare | RW    | 5100    |
 +----------+---------------+--------------+-----------+-------+---------+
 5 rows in set (0.00 sec)
-Question 6 ------------------------------------------------------------------------------------------
+
+PART_B CUMPULSORY
+
+Question 6 
+--------------------------------------------------------------------------------------------------------------------------------------
 
 	#INTRO CREATING TABLES 
 
@@ -114,7 +120,7 @@ Question 6 ---------------------------------------------------------------------
 		->SELECT employees.name, departments.name,employees.salary as department FROM employees INNER JOIN departments ON employees.department = departments.id WHERE employees.salary > (SELECT AVG(employees.salary) FROM employees);
 
 QUESTION 7
-
+--------------------------------------------------------------------------------------------------------------------------------------
 mysql> CREATE DATABASE School;
 Query OK, 1 row affected (0.00 sec)
 
@@ -203,7 +209,11 @@ mysql> CREATE DATABASE Company;
 ERROR 1007 (HY000): Can't create database 'company'; database exists
 mysql> USE Company;
 Database changed
-mysql>
+
+PART_C ANSWER ANY TWO QUESTION
+
+mysql> QUESTION 9
+--------------------------------------------------------------------------------------------------------------------------------------
 mysql> -- Create the EMPLOYEES table with all necessary columns
 Query OK, 0 rows affected (0.00 sec)
 
@@ -364,10 +374,8 @@ mysql> SELECT First_Name, Last_Name
 Empty set (0.00 sec)
 
 mysql>
-[4:34 PM, 1/17/2025] Murasa: QUESTION 10
-
-
-
+QUESTION 10
+--------------------------------------------------------------------------------------------------------------------------------------
 mysql> CREATE TABLE Sales (
     ->     Sales_No INT PRIMARY KEY,
     ->     Salesname VARCHAR(50) NOT NULL,

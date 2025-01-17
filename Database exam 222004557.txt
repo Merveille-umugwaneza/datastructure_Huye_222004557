@@ -1,0 +1,446 @@
+mysql> create database clients;
+Query OK, 1 row affected (0.02 sec)
+mysql> use clients;
+Database changed
+mysql> create table client_master(clientNO int(10),Name char(50),address varchar(100),City char(30),State varchar(30),bal_due varchar(30));
+Query OK, 0 rows affected, 1 warning (0.03 sec)
+
+mysql> desc client_master;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| clientNO | int          | YES  |     | NULL    |       |
+| Name     | char(50)     | YES  |     | NULL    |       |
+| address  | varchar(100) | YES  |     | NULL    |       |
+| City     | char(30)     | YES  |     | NULL    |       |
+| State    | varchar(30)  | YES  |     | NULL    |       |
+| bal_due  | varchar(30)  | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql> INSERT INTO Client_master (ClientNO, Name, Address, City, State, bal_due)
+    -> VALUES
+    -> ('C101', 'John Doe', '123 Maple St', 'Kigali', 'RW', 4500),
+    -> ('C102', 'Jane Smith', '456 Oak St', 'Huye', 'RW', 6200),
+    -> ('C103', 'Alice Brown', '789 Pine St', 'Musanze', 'RW', 3000),
+    -> ('C104', 'Michael White', '321 Cedar St', 'Rubavu', 'RW', 5200),
+    -> ('C105', 'Emily Davis', '654 Birch St', 'Nyagatare', 'RW', 1500);
+Query OK, 5 rows affected, 5 warnings (0.02 sec)
+Records: 5  Duplicates: 0  Warnings: 5
+
+mysql> select *from Client_master;
++----------+---------------+--------------+-----------+-------+---------+
+| clientNO | Name          | address      | City      | State | bal_due |
++----------+---------------+--------------+-----------+-------+---------+
+|        0 | John Doe      | 123 Maple St | Kigali    | RW    | 4500    |
+|        0 | Jane Smith    | 456 Oak St   | Huye      | RW    | 6200    |
+|        0 | Alice Brown   | 789 Pine St  | Musanze   | RW    | 3000    |
+|        0 | Michael White | 321 Cedar St | Rubavu    | RW    | 5200    |
+|        0 | Emily Davis   | 654 Birch St | Nyagatare | RW    | 1500    |
++----------+---------------+--------------+-----------+-------+---------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT Name
+    -> FROM Client_master
+    -> WHERE bal_due > 5000;
++---------------+
+| Name          |
++---------------+
+| Jane Smith    |
+| Michael White |
++---------------+
+2 rows in set (0.01 sec)
+
+mysql> UPDATE Client_master
+    -> SET bal_due = 5100
+    -> WHERE ClientNO = 'C123';
+Query OK, 5 rows affected, 1 warning (0.00 sec)
+Rows matched: 5  Changed: 5  Warnings: 1
+
+mysql> select *from Client_master;
++----------+---------------+--------------+-----------+-------+---------+
+| clientNO | Name          | address      | City      | State | bal_due |
++----------+---------------+--------------+-----------+-------+---------+
+|        0 | John Doe      | 123 Maple St | Kigali    | RW    | 5100    |
+|        0 | Jane Smith    | 456 Oak St   | Huye      | RW    | 5100    |
+|        0 | Alice Brown   | 789 Pine St  | Musanze   | RW    | 5100    |
+|        0 | Michael White | 321 Cedar St | Rubavu    | RW    | 5100    |
+|        0 | Emily Davis   | 654 Birch St | Nyagatare | RW    | 5100    |
++----------+---------------+--------------+-----------+-------+---------+
+5 rows in set (0.00 sec)
+
+mysql> ALTER TABLE Client_master
+    -> RENAME TO Client12;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> select *from Client_master;
+ERROR 1146 (42S02): Table 'clients.client_master' doesn't exist
+mysql> select *from Client12;
++----------+---------------+--------------+-----------+-------+---------+
+| clientNO | Name          | address      | City      | State | bal_due |
++----------+---------------+--------------+-----------+-------+---------+
+|        0 | John Doe      | 123 Maple St | Kigali    | RW    | 5100    |
+|        0 | Jane Smith    | 456 Oak St   | Huye      | RW    | 5100    |
+|        0 | Alice Brown   | 789 Pine St  | Musanze   | RW    | 5100    |
+|        0 | Michael White | 321 Cedar St | Rubavu    | RW    | 5100    |
+|        0 | Emily Davis   | 654 Birch St | Nyagatare | RW    | 5100    |
++----------+---------------+--------------+-----------+-------+---------+
+5 rows in set (0.00 sec)
+Question 6 ------------------------------------------------------------------------------------------
+
+	#INTRO CREATING TABLES 
+
+	-> CREATE TABLE departments (id VARCHAR(255) NOT NULL , name VARCHAR(255) NOT NULL , PRIMARY KEY (id))
+	-> CREATE TABLE employees (id VARCHAR(255) NOT NULL , name VARCHAR(255) NOT NULL , department varchar(255) NOT NULL ,salary int(11) NOT NULL , PRIMARY KEY (id), FOREIGN KEY (department) REFERENCES departments(id));
+
+--------------------------------------------------------------------------------------------------------	
+
+	A)
+
+		->INSERT INTO departments (id, name) VALUES ('001', 'HR'), ('002', 'finance'), ('003', 'marketing'), ('004', 'research & development'), ('005', 'reception') #inserting into departments table
+		->INSERT INTO employees (id, name, department,salary) VALUES ('001', 'employee 01', '003',1000), ('002', 'employee 2', '001',4000), ('003', 'employee 3', '005',2000), ('004', 'employee 4', '005',2000), ('005', 'employee 005', '001',4000) #inserting into employees table with their corresponding departments
+	B)
+
+		-> desc employees;
+
+	C)
+
+		->SELECT employees.name, departments.name as department FROM employees LEFT OUTER JOIN departments ON employees.department = departments.id;
+	D) 
+
+		->SELECT employees.name, departments.name as department FROM employees RIGHT OUTER JOIN departments ON employees.department = departments.id;
+
+	E)
+		->SELECT employees.name, departments.name,employees.salary as department FROM employees INNER JOIN departments ON employees.department = departments.id WHERE employees.salary > (SELECT AVG(employees.salary) FROM employees);
+
+QUESTION 7
+
+mysql> CREATE DATABASE School;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> USE School;
+Database changed
+mysql>
+mysql> -- Step 2: Create the STUDENT table
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> CREATE TABLE STUDENT (
+    ->     studentId INT PRIMARY KEY,
+    ->     fullnames VARCHAR(100) NOT NULL,
+    ->     gender ENUM('Male', 'Female', 'Other') NOT NULL,
+    ->     age INT NOT NULL,
+    ->     department VARCHAR(50) NOT NULL
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql>
+mysql> -- Step 3: Insert sample data into the STUDENT table
+Query OK, 0 rows affected (0.00 sec)
+mysql> CREATE VIEW StudentList AS
+    -> SELECT studentId, fullnames, gender, age, department
+    -> FROM STUDENT;
+
+mysql> CREATE VIEW StudentList AS
+    -> SELECT studentId, fullnames, gender, age, department
+    -> FROM STUDENT;
+ERROR 1050 (42S01): Table 'StudentList' already exists
+mysql> CREATE VIEW GirlList AS
+    -> SELECT studentId, fullnames, age, department
+    -> FROM STUDENT
+    -> WHERE gender = 'Female';
+
+mysql> CREATE VIEW BoyList AS
+    -> SELECT studentId, fullnames, age, department
+    -> FROM STUDENT
+    -> WHERE gender = 'Male';
+Query OK, 0 rows affected (0.02 sec)
+
+
+mysql> INSERT INTO STUDENT (studentId, fullnames, gender, age, department)
+    -> VALUES
+    -> ('S101', 'John Doe', 'Male', 22, 'Computer Science'),
+    -> ('S102', 'Jane Smith', 'Female', 20, 'Business Administration'),
+    -> ('S103', 'Alice Brown', 'Female', 18, 'Engineering'),
+    -> ('S104', 'Michael White', 'Male', 19, 'Medicine'),
+    -> ('S105', 'Emily Davis', 'Female', 21, 'Law');
+ERROR 1062 (23000): Duplicate entry '0' for key 'student.PRIMARY'
+mysql> DELETE FROM STUDENT
+    -> WHERE age < 20;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> DELETE FROM STUDENT
+    -> WHERE age < 20;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql>
+mysql> SELECT*FROM STUDENT;
++-----------+-----------+--------+-----+------------------+
+| studentId | fullnames | gender | age | department       |
++-----------+-----------+--------+-----+------------------+
+|         0 | John Doe  | Male   |  22 | Computer Science |
++-----------+-----------+--------+-----+------------------+
+1 row in set (0.00 sec)
+
+mysql>
+
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 115
+Server version: 8.3.0 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> -- Create the database
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> CREATE DATABASE Company;
+ERROR 1007 (HY000): Can't create database 'company'; database exists
+mysql> USE Company;
+Database changed
+mysql>
+mysql> -- Create the EMPLOYEES table with all necessary columns
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> CREATE TABLE EMPLOYEES (
+    ->     Employee_Id INT PRIMARY KEY,
+    ->     First_Name VARCHAR(50) NOT NULL,
+    ->     Last_Name VARCHAR(50) NOT NULL,
+    ->     Email VARCHAR(100),
+    ->     Phone_Number VARCHAR(15),
+    ->     Hire_Date DATE,
+    ->     Job_Id VARCHAR(10),
+    ->     Salary DECIMAL(10, 2) NOT NULL,
+    ->     Commission_Pct DECIMAL(5, 2),
+    ->     Manager_Id INT,
+    ->     Department_Id INT
+    -> );
+ERROR 1050 (42S01): Table 'employees' already exists
+mysql> -- Insert sample data into the EMPLOYEES table
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> INSERT INTO EMPLOYEES (Employee_Id, First_Name, Last_Name, Email, Phone_Number, Hire_Date, Job_Id, Salary, Commission_Pct, Manager_Id, Department_Id)
+    -> VALUES
+    ->     (101, 'John', 'Doe', 'john.doe@example.com', '555-1234', '2020-01-15', 'SA_REP', 5000.00, 0.10, NULL, 60),
+    ->     (102, 'Jane', 'Smith', 'jane.smith@example.com', '555-5678', '2019-03-10', 'SA_REP', 6000.00, 0.12, 101, 60),
+    ->     (103, 'Alice', 'Austin', 'alice.austin@example.com', '555-9876', '2021-06-21', 'SA_REP', 4800.00, 0.08, 101, 70),
+    ->     (104, 'Michael', 'Austin', 'michael.austin@example.com', '555-6543', '2020-11-01', 'IT_PROG', 7000.00, NULL, 102, 70),
+    ->     (105, 'Emily', 'Davis', 'emily.davis@example.com', '555-1122', '2022-05-15', 'FI_ACCOUNT', 4500.00, NULL, 102, 80),
+    ->     (106, 'Robert', 'Johnson', 'robert.johnson@example.com', '555-3344', '2018-09-03', 'SA_REP', 5200.00, 0.09, 103, 80),
+    ->     (107, 'Patricia', 'Williams', 'patricia.williams@example.com', '555-7788', '2017-12-19', 'SA_REP', 6300.00, 0.10, 103, 80),
+    ->     (108, 'David', 'Miller', 'david.miller@example.com', '555-5566', '2022-02-18', 'MK_MAN', 4800.00, NULL, 104, 90),
+    ->     (109, 'Susan', 'Wilson', 'susan.wilson@example.com', '555-7789', '2020-06-25', 'IT_PROG', 7200.00, NULL, 104, 90),
+    ->     (110, 'James', 'Taylor', 'james.taylor@example.com', '555-9900', '2021-08-30', 'SA_REP', 5800.00, 0.11, 104, 90);
+ERROR 1054 (42S22): Unknown column 'Email' in 'field list'
+mysql> SELECT Employee_Id, First_Name, Last_Name, Salary
+    -> FROM EMPLOYEES;
++-------------+------------+-----------+----------+
+| Employee_Id | First_Name | Last_Name | Salary   |
++-------------+------------+-----------+----------+
+|         101 | John       | Doe       | 50000.00 |
+|         102 | Jane       | Smith     | 60000.00 |
+|         103 | Alice      | Brown     | 55000.00 |
+|         104 | Michael    | White     | 70000.00 |
+|         105 | Emily      | Davis     | 45000.00 |
+|         106 | Robert     | Johnson   | 52000.00 |
+|         107 | Patricia   | Williams  | 63000.00 |
+|         108 | David      | Miller    | 48000.00 |
+|         109 | Susan      | Wilson    | 72000.00 |
+|         110 | James      | Taylor    | 58000.00 |
++-------------+------------+-----------+----------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT Employee_Id, First_Name, Last_Name
+    -> FROM EMPLOYEES
+    -> WHERE Manager_Id = 100;
+Empty set (0.00 sec)
+
+mysql> SELECT First_Name, Last_Name
+    -> FROM EMPLOYEES
+    -> WHERE Salary >= 4800;
++------------+-----------+
+| First_Name | Last_Name |
++------------+-----------+
+| John       | Doe       |
+| Jane       | Smith     |
+| Alice      | Brown     |
+| Michael    | White     |
+| Emily      | Davis     |
+| Robert     | Johnson   |
+| Patricia   | Williams  |
+| David      | Miller    |
+| Susan      | Wilson    |
+| James      | Taylor    |
++------------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT First_Name, Last_Name
+    -> FROM EMPLOYEES
+    -> WHERE Last_Name = 'AUSTIN';
+Empty set (0.00 sec)
+
+mysql> SELECT First_Name, Last_Name
+    -> FROM EMPLOYEES
+    -> WHERE Department_Id IN (60, 70, 80);
+ERROR 1054 (42S22): Unknown column 'Department_Id' in 'where clause'
+mysql> DESCRIBE EMPLOYEES;
++-------------+---------------+------+-----+---------+-------+
+| Field       | Type          | Null | Key | Default | Extra |
++-------------+---------------+------+-----+---------+-------+
+| Employee_Id | int           | NO   | PRI | NULL    |       |
+| First_Name  | varchar(50)   | NO   |     | NULL    |       |
+| Last_Name   | varchar(50)   | NO   |     | NULL    |       |
+| Salary      | decimal(10,2) | NO   |     | NULL    |       |
+| Manager_Id  | int           | YES  |     | NULL    |       |
++-------------+---------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> ALTER TABLE EMPLOYEES ADD COLUMN Department_Id INT;
+Query OK, 10 rows affected (0.04 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> SELECT First_Name, Last_Name
+    -> FROM EMPLOYEES
+    -> WHERE Department_Id IN (60, 70, 80);
+Empty set (0.00 sec)
+
+mysql>[4:34 PM, 1/17/2025] Murasa: mysql> SELECT Employee_Id, First_Name, Last_Name
+    -> FROM EMPLOYEES
+    -> WHERE Manager_Id = 100;
+Empty set (0.00 sec)
+
+mysql> SELECT First_Name, Last_Name
+    -> FROM EMPLOYEES
+    -> WHERE Salary >= 4800;
++------------+-----------+
+| First_Name | Last_Name |
++------------+-----------+
+| John       | Doe       |
+| Jane       | Smith     |
+| Alice      | Brown     |
+| Michael    | White     |
+| Emily      | Davis     |
+| Robert     | Johnson   |
+| Patricia   | Williams  |
+| David      | Miller    |
+| Susan      | Wilson    |
+| James      | Taylor    |
++------------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT First_Name, Last_Name
+    -> FROM EMPLOYEES
+    -> WHERE Last_Name = 'AUSTIN';
+Empty set (0.00 sec)
+
+mysql> SELECT First_Name, Last_Name
+    -> FROM EMPLOYEES
+    -> WHERE Department_Id IN (60, 70, 80);
+ERROR 1054 (42S22): Unknown column 'Department_Id' in 'where clause'
+mysql> DESCRIBE EMPLOYEES;
++-------------+---------------+------+-----+---------+-------+
+| Field       | Type          | Null | Key | Default | Extra |
++-------------+---------------+------+-----+---------+-------+
+| Employee_Id | int           | NO   | PRI | NULL    |       |
+| First_Name  | varchar(50)   | NO   |     | NULL    |       |
+| Last_Name   | varchar(50)   | NO   |     | NULL    |       |
+| Salary      | decimal(10,2) | NO   |     | NULL    |       |
+| Manager_Id  | int           | YES  |     | NULL    |       |
++-------------+---------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> ALTER TABLE EMPLOYEES ADD COLUMN Department_Id INT;
+Query OK, 10 rows affected (0.04 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> SELECT First_Name, Last_Name
+    -> FROM EMPLOYEES
+    -> WHERE Department_Id IN (60, 70, 80);
+Empty set (0.00 sec)
+
+mysql>
+[4:34 PM, 1/17/2025] Murasa: QUESTION 10
+
+
+
+mysql> CREATE TABLE Sales (
+    ->     Sales_No INT PRIMARY KEY,
+    ->     Salesname VARCHAR(50) NOT NULL,
+    ->     Branch VARCHAR(50) NOT NULL,
+    ->     Salesamount DECIMAL(10, 2) NOT NULL,
+    ->     DOB DATE NOT NULL
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> INSERT INTO Sales (Sales_No, Salesname, Branch, Salesamount, DOB)
+    -> VALUES
+    ->     (1, 'John Doe', 'Kigali', 5000.00, '1985-12-15'),
+    ->     (2, 'Jane Smith', 'Huye', 6000.00, '1990-03-10'),
+    ->     (3, 'Alice Brown', 'Kigali', 4500.00, '1982-12-25'),
+    ->     (4, 'Michael White', 'Musanze', 7000.00, '1995-12-05'),
+    ->     (5, 'Emily Davis', 'Kigali', 3000.00, '1992-11-17');
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> SELECT Branch, SUM(Salesamount) AS Total_Salesamount
+    -> FROM Sales
+    -> GROUP BY Branch;
++---------+-------------------+
+| Branch  | Total_Salesamount |
++---------+-------------------+
+| Kigali  |          12500.00 |
+| Huye    |           6000.00 |
+| Musanze |           7000.00 |
++---------+-------------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT Branch, AVG(Salesamount) AS Average_Salesamount
+    -> FROM Sales
+    -> GROUP BY Branch;
++---------+---------------------+
+| Branch  | Average_Salesamount |
++---------+---------------------+
+| Kigali  |         4166.666667 |
+| Huye    |         6000.000000 |
+| Musanze |         7000.000000 |
++---------+---------------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT Salesname, DATE_FORMAT(DOB, '%d-%b-%y') AS DOB
+    -> FROM Sales
+    -> WHERE MONTH(DOB) = 12;
++---------------+-----------+
+| Salesname     | DOB       |
++---------------+-----------+
+| John Doe      | 15-Dec-85 |
+| Alice Brown   | 25-Dec-82 |
+| Michael White | 05-Dec-95 |
++---------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT Salesname, DATE_FORMAT(DOB, '%b-%d-%Y') AS DOB
+    -> FROM Sales
+    -> ORDER BY MONTH(DOB), DAY(DOB);
++---------------+-------------+
+| Salesname     | DOB         |
++---------------+-------------+
+| Jane Smith    | Mar-10-1990 |
+| Emily Davis   | Nov-17-1992 |
+| Michael White | Dec-05-1995 |
+| John Doe      | Dec-15-1985 |
+| Alice Brown   | Dec-25-1982 |
++---------------+-------------+
+5 rows in set (0.00 sec)
+
+mysql>
+
+
+
+
+
+
